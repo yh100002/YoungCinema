@@ -38,8 +38,8 @@ namespace Movie.Web
             builder.RegisterControllers(typeof(Global).Assembly);           
             builder.RegisterApiControllers(typeof(Global).Assembly);
 
-            builder.RegisterType<ContentsRepository>()
-           .As<IContentsRepository>()
+            builder.RegisterType<MoviesRepository>()
+           .As<IMoviesRepository>()
            .InstancePerRequest();
 
             var container = builder.Build();

@@ -35,7 +35,7 @@ namespace Movie.UnitTest
         [TestMethod]
         public void YoutubeSearchTest()
         {
-            ContentsRepository repo = new ContentsRepository();
+            MoviesRepository repo = new MoviesRepository();
             repo.ClearCache();
             var found = repo.SearchMovie(DataSourceType.YOUTUBE.Description(),"terminator 2","",0,0);
 
@@ -46,7 +46,7 @@ namespace Movie.UnitTest
         [TestMethod]
         public void TMDBSemanticOnlySearchTest()
         {
-            ContentsRepository repo = new ContentsRepository();
+            MoviesRepository repo = new MoviesRepository();
             repo.ClearCache();
             var found = repo.SearchMovie(DataSourceType.TMDB.Description(), "terminator 2", "", 0, 0);
 
@@ -56,7 +56,7 @@ namespace Movie.UnitTest
         [TestMethod]
         public void TMDBSemanticActorYearSearchTest()
         {
-            ContentsRepository repo = new ContentsRepository();
+            MoviesRepository repo = new MoviesRepository();
             repo.ClearCache();
             var found = repo.SearchMovie(DataSourceType.TMDB.Description(), "terminator 2", "arnold", 1900, 2000);
             Assert.IsTrue(found.Count() > 0);
@@ -65,7 +65,7 @@ namespace Movie.UnitTest
         [TestMethod]
         public void CacheSemanticActorYearSearchTest()
         {
-            ContentsRepository repo = new ContentsRepository();
+            MoviesRepository repo = new MoviesRepository();
             repo.ClearCache();
 
             var found1 = repo.SearchMovie(DataSourceType.TMDB.Description(), "terminator 2", "arnold", 1900, 2000);
@@ -79,7 +79,7 @@ namespace Movie.UnitTest
         [TestMethod]
         public void CacheClearTest()
         {
-            ContentsRepository repo = new ContentsRepository();
+            MoviesRepository repo = new MoviesRepository();
             repo.ClearCache();
 
             var found1 = repo.SearchMovie(DataSourceType.YOUTUBE.Description(), "terminator 2", "", 0, 0);

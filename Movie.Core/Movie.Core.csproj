@@ -43,7 +43,8 @@
     <Compile Include="Enums\DataSourceType.cs" />
     <Compile Include="Interfaces\IContent.cs" />
     <Compile Include="Interfaces\IContentFinder.cs" />
-    <Compile Include="Interfaces\IContentsRepository.cs" />
+    <Compile Include="Interfaces\IMoviesRepository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\ISearchSource.cs" />
     <Compile Include="MovieBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

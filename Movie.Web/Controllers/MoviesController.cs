@@ -18,10 +18,10 @@ namespace Movie.Web.Controllers
     [Route("{action = index}")]
     public class MoviesController : Controller
     {
-        private readonly IContentsRepository _moviesRepository;
+        private readonly IMoviesRepository _moviesRepository;
         Logger logger = LogManager.GetCurrentClassLogger();
 
-        public MoviesController(IContentsRepository repo)
+        public MoviesController(IMoviesRepository repo)
         {
             _moviesRepository = repo;
         }

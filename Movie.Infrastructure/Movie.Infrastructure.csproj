@@ -103,7 +103,7 @@
     <Compile Include="Configuration\MovieElementCollection.cs" />
     <Compile Include="Configuration\MovieElementReriverSection.cs" />
     <Compile Include="ContentFinder.cs" />
-    <Compile Include="ContentsRepository.cs" />
+    <Compile Include="MoviesRepository.cs" />
     <Compile Include="ParameterFactory\Param.cs" />
     <Compile Include="ParameterFactory\ParamCache.cs" />
     <Compile Include="ParameterFactory\ParamCreator.cs" />

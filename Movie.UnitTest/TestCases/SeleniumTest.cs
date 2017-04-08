@@ -26,7 +26,7 @@ namespace Movie.UnitTest
         [TestMethod]
         public void SimpleYoutubeSearchTest()
         {
-            ContentsRepository repo = new ContentsRepository();
+            MoviesRepository repo = new MoviesRepository();
             repo.ClearCache();
 
             var webdriver = new ChromeDriver();
@@ -64,7 +64,7 @@ namespace Movie.UnitTest
         [TestMethod]
         public void SimpleTMDBSearchTest() //FREQUENT TIME OUT EXCEPTION BECAUSE OF SLOW WEB API LOADING
         {
-            ContentsRepository repo = new ContentsRepository();
+            MoviesRepository repo = new MoviesRepository();
             repo.ClearCache();
             var webdriver = new ChromeDriver();
 
@@ -153,7 +153,7 @@ namespace Movie.UnitTest
         [TestMethod]
         public void SimpleIntegratedSearchTest() 
         {
-            ContentsRepository repo = new ContentsRepository();
+            MoviesRepository repo = new MoviesRepository();
             repo.ClearCache();
             var webdriver = new ChromeDriver();
 

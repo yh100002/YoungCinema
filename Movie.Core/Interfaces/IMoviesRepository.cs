@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Movie.Core.Interfaces
 {
-    public interface IContentsRepository : IDisposable
+    public interface IMoviesRepository : IRepository
     {
         IEnumerable<IContent> SearchMovie(string filter);
         IEnumerable<IContent> SearchMovie(string data_source, string filter, string actor, int from, int to);

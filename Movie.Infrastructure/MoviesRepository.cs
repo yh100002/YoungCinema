@@ -16,7 +16,7 @@ using Movie.Infrastructure.ParameterFactory;
 
 namespace Movie.Infrastructure
 {
-    public class ContentsRepository : IContentsRepository, IDisposable
+    public class MoviesRepository : IMoviesRepository, IDisposable
     {
 
         Logger logger = LogManager.GetCurrentClassLogger();
@@ -88,6 +88,11 @@ namespace Movie.Infrastructure
         }
 
         public IEnumerable<IContent> SearchMovie(string filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CloseConnection()
         {
             throw new NotImplementedException();
         }
