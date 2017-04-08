@@ -1,0 +1,114 @@
+﻿<hr />
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary" id="panelLatestMovies">
+            <div class="panel-heading clearfix">
+                <div class="col-xs-6 col-sm-1">
+                    <label class="control-label">Data Source</label>
+                    <select id="selectDataSource" class="form-control black" ng-init="selectedSource=sources[0]" ng-model="selectedSource" ng-change="selectedSourceEvt()" ng-options="x for x in sources"></select>
+                    <input type="hidden" name="Source" />
+                </div>
+                <div class="col-xs-6 col-sm-2">
+                    <label class="control-label">Range Years(YouTube Ignored)</label>
+                    <p class="input-group">
+                        <input type="text" class="form-control" ng-model="dtFrom" datepicker-mode="'year'" ng-disabled="calendarDisabled1"
+                               min-mode="year" min-date="minDate" show-weeks="false"
+                               datepicker-popup="yyyy" is-open="openedFrom" ng-focus="openFrom($event)"
+                               date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openFrom($event)" ng-disabled="calendarDisabled1">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                        <input type="text" class="form-control" ng-model="dtTo" datepicker-mode="'year'" ng-disabled="calendarDisabled2"
+                               min-mode="year" min-date="minDate" show-weeks="false"
+                               datepicker-popup="yyyy" is-open="openedTo" ng-focus="openTo($event)"
+                               date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openTo($event)" ng-disabled="calendarDisabled2">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+                <div class="col-xs-8 col-sm-2">
+                    <label class="control-label">Actor Filter(YouTube Ignored)</label>
+                    <div class="input-group number-spinner">
+                        <input id="inputSearchActor" ng-disabled="calendarDisabled1" ng-model="filterActor" type="search" class="form-control shortInputSearch" placeholder="search actors.....">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-2">
+                    <label class="control-label">Semantic Filter</label>
+                    <div class="input-group number-spinner">
+                        <input id="inputSearchMovies" type="search" ng-keyup="$event.keyCode == 13 ? search() : null" ng-model="filterMovies" class="form-control shortInputSearch " placeholder="search title, descriptions.....">
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-1">
+                    <label class="control-label">Try</label>
+                    <div class="input-group number-spinner">
+                        <button id="btnSearch" class="btn btn-primary pull-right" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
+                        <button id="btnClear" class="btn btn-primary pull-right" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                    </div>
+                </div>                
+            </div>
+
+            <div class="panel-body">
+                <div ng-if="loadingMovies">
+                    <div class="col-xs-6"></div>
+                    <div class="col-xs-6">
+                        <i class="fa fa-refresh fa-5x fa-spin"></i> <label class="label label-primary">Loading movies...</label>
+                    </div>
+                    <div class="col-xs-6"></div>
+                </div>
+                <div class="col-xs-12 col-sm-6 movie" ng-repeat="movie in Movies | filter:filterMovies">
+                    <div class="panel panel-default">
+                        <div id="movieTitle" class="panel-heading">
+                            <strong>{{movie.Title}}</strong>
+                        </div>
+                        <div class="panel-body">
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <a class="fancybox pull-left" rel="gallery1" ng-href="{{movie.ImageURI}}" title="{{movie.Description | limitTo:100}}">
+                                        <img class="media-object" height="170" ng-src="{{movie.ImageURI}}" alt="" />
+                                    </a>
+
+                                </a>
+                                <div class="media-body">
+                                    <img ng-src="../../Content/images/movies/{{movie.LogoName}}.png" height="40" width="100" alt="">
+                                    <div><small>{{movie.Description | limitTo: 200}}...</small></div>
+                                    <br /><br /><label class="label label-info">{{movie.Director}}</label>
+                                    <label class="label label-info">{{movie.Actor}}</label>
+                                    <label class="label label-info">{{movie.ReleaseDate | utcConvert}}</label>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <a class="btn btn-social-icon btn-facebook" ng-click="facebookShare(movie.Title,movie.TrailerURI,movie.ImageURI,'TamTam Cinema',movie.Description);"><span class="fa fa-facebook"></span></a>
+                                    <a class="btn btn-social-icon btn-twitter" ng-click="twitterShare(movie.TrailerURI,movie.Title)"><span class="fa fa-twitter"></span></a>
+                                    <span component-rating="{{movie.Rating}}"></span>                                    
+                                </div>  
+                                <div class="col-md-2 pull-right" ng-if="movie.TrailerURI == ''">
+                                    <available-movie is-available="false" class="pull-right"></available-movie>
+                                </div>
+                                <div class="col-md-2 pull-right" ng-if="movie.TrailerURI != ''">
+                                    <a class="fancybox-media" ng-href="{{movie.TrailerURI}}">Trailer<i class="fa fa-video-camera fa-fw"></i></a>
+                                </div>                                   
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="text-center">
+                        <custom-pager page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></custom-pager>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
